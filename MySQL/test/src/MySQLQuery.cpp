@@ -2,6 +2,7 @@
 
 int main()
 {
-    std::cout << "Hello world !!!" << std::endl;
-    return 0;
+    mysqltuner::MySQL* connection = new mysqltuner::MySQL("localhost", "root", "", "test");
+    delete connection;
+    return EXIT_SUCCESS;
 }

@@ -7,7 +7,7 @@ namespace mysqltuner {
         this->driver = nullptr;
         this->connection = nullptr;
         this->statement = nullptr;
-        this->preparedStatament = nullptr;
+        this->pstatement = nullptr;
         this->result = nullptr;
     }
 
@@ -47,8 +47,21 @@ namespace mysqltuner {
     {
         delete this->connection;
         delete this->statement;
-        delete this->preparedStatament;
+        delete this->pstatement;
         delete this->result;
+    }
+
+    sql::ResultSet* MySQL::execute(const sql::SQLString& sql)
+    {
+        this->statement = this->connection->createStatement();
+        this->result = this->statement->executeQuery(sql);
+        return this->result;
+    }
+
+    sql::PreparedStatement* MySQL::prepareStatement(const sql::SQLString& sql)
+    {
+        this->pstatement = connection->prepareStatement(sql);
+        return this->pstatement;
     }
 
 } // namespace mysqltuner

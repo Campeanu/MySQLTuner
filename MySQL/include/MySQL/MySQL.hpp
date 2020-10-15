@@ -19,6 +19,11 @@ namespace mysqltuner {
         MySQL(const sql::SQLString& db_host, const sql::SQLString& db_user, const sql::SQLString& db_pass, const sql::SQLString& name);
         virtual ~MySQL();
 
+    // Public properties
+    public:
+        sql::ResultSet* execute(const sql::SQLString& sql);
+        sql::PreparedStatement* prepareStatement(const sql::SQLString& sql);
+
     // Private methods
     private:
         void init();
@@ -29,7 +34,7 @@ namespace mysqltuner {
         sql::Driver* driver;
         sql::Connection* connection;
         sql::Statement* statement;
-        sql::PreparedStatement* preparedStatament;
+        sql::PreparedStatement* pstatement;
         sql::ResultSet* result;
 
         const sql::SQLString db_host;
